@@ -1,0 +1,15 @@
+parameters:
+    locale: 'en'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Mikro\:
+        resource: '../src/*'
+        exclude: '../src/Kernel.php'
+
+    Mikro\Http\AbstractControllersFactory:
+        arguments: [ !tagged mikro.controller ]
+        public: true

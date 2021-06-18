@@ -1,0 +1,22 @@
+{
+  "name": "oscmarb/mikro",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Óscar Martínez Benítez"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "symfony/dependency-injection": "^5.3",
+    "symfony/config": "^5.3",
+    "symfony/yaml": "^5.3",
+    "nikic/fast-route": "^1.3",
+    "symfony/http-foundation": "^5.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mikro\\": "src/"
+    }
+  }
+}
