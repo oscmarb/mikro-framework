@@ -79,11 +79,10 @@ class Router
                 return Response::internalServerError();
             }
 
-            [$class, $controllerMethodVariables] = $routeInfo;
+            [1 => $class, 2 => $controllerMethodVariables] = $routeInfo;
 
             $controller = $this->container->get($class);
 
-            /** @phpstan-ignore-next-line */
             return call_user_func_array([$controller, '__invoke'], $controllerMethodVariables);
         } catch (\Throwable $exception) {
             return new Response($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
