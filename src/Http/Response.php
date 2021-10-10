@@ -46,7 +46,7 @@ class Response extends \Symfony\Component\HttpFoundation\Response
         return self::buildResponse(self::HTTP_FORBIDDEN);
     }
 
-    public static function buildResponse(int $code, $data = null, $headers = []): self
+    public static function buildResponse(int $code, mixed $data = null, array $headers = []): self
     {
         return new self($data, $code, $headers);
     }

@@ -9,6 +9,14 @@ use Mikro\Http\Router;
 
 class MikroKernel
 {
+    public static function start(): self
+    {
+        $kernel = new self();
+        $kernel->run();
+
+        return $kernel;
+    }
+
     public function __construct()
     {
         MikroContainer::load($this->servicesDir());

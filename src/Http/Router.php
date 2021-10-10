@@ -13,8 +13,7 @@ use function FastRoute\simpleDispatcher;
 class Router
 {
     private static self $instance;
-
-    private $dispatcher;
+    private Dispatcher $dispatcher;
 
     public static function instance(): self
     {
@@ -80,11 +79,11 @@ class Router
                 return Response::internalServerError();
             }
 
-            $class = $routeInfo[1];
-            $controllerMethodVariables = $routeInfo[2];
+            [$class, $controllerMethodVariables] = $routeInfo;
 
             $controller = $this->container->get($class);
 
+            /** @phpstan-ignore-next-line */
             return call_user_func_array([$controller, '__invoke'], $controllerMethodVariables);
         } catch (\Throwable $exception) {
             return new Response($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -95,7 +94,9 @@ class Router
     {
         $reflectionClass = new \ReflectionClass($controller);
         $attributes = $reflectionClass->getMethod('__invoke')->getAttributes();
+        /** @var Route $route */
+        $route = $attributes[0]->newInstance();
 
-        return $attributes[0]->newInstance();
+        return $route;
     }
 }
