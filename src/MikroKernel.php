@@ -9,9 +9,9 @@ use Mikro\Http\Router;
 
 class MikroKernel
 {
-    public static function start(): self
+    public static function start(): static
     {
-        $kernel = new self();
+        $kernel = new static();
         $kernel->run();
 
         return $kernel;
